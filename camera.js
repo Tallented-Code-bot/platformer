@@ -9,7 +9,6 @@ function Camera(width,height){
 	this.tileHeight=32;//the height in pixels for 1 tile
 	this.canvas.width=this.width*this.tileWidth;
 	this.canvas.height=this.height*this.tileHeight;
-	// console.log(this.canvas.height);
 	this.keys();
 }
 
@@ -17,8 +16,9 @@ function Camera(width,height){
 Camera.prototype.render=function(world){
 	//clear the screen
 	this.context.clearRect(0,0,this.canvas.width,this.canvas.height);
+	//render object
+	this.context.fillStyle="red";
 	//render blocks
-	//here x and y refer to whole tiles
 	for(let x=this.x;x<this.width+this.x;x++){
 		for(let y=this.y;y<this.height+this.y;y++){
 			let position=this.convertToPixel(x,y);
@@ -36,6 +36,8 @@ Camera.prototype.render=function(world){
 			//this makes sense
 		}
 	}
+	this.context.fillStyle="red";
+	this.context.fillRect(world.object.x*this.tileWidth,world.object.y*this.tileHeight,world.object.width*this.tileWidth,world.object.height*this.tileHeight);
 }
 
 
