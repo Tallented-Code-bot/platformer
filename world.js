@@ -18,7 +18,7 @@ World.prototype.populateTiles=function(){
 		this.tiles.push([]);
 		for(let y=0;y<this.height;y++){
 			let color
-			if(Math.random()<0.5){
+			if(x===0||x===this.width-1||y===0||y===this.height-1){//this makes a black border
 				color="black";
 			}else{color="white"}
 			this.tiles[x].push(new Tile(x,y,this.width,this.height,color));
