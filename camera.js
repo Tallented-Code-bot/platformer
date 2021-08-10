@@ -9,7 +9,6 @@ function Camera(width,height){
 	this.tileHeight=32;//the height in pixels for 1 tile
 	this.canvas.width=this.width*this.tileWidth;
 	this.canvas.height=this.height*this.tileHeight;
-	this.keys();
 }
 
 
@@ -41,14 +40,6 @@ Camera.prototype.render=function(world){
 }
 
 
-Camera.prototype.keys=function(){
-	window.addEventListener("keydown",(event)=>{
-		if(event.key==="a")this.x--;
-		if(event.key==="d")this.x++;
-		if(event.key==="w")this.y++;
-		if(event.key==="s")this.y--;
-	})
-}
 
 
 Camera.prototype.convertToPixel=function(blockX,blockY){
