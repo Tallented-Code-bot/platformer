@@ -5,12 +5,12 @@ function World(){
 
 	this.camera=new Camera(20,20);
 	this.populateTiles();	
-	this.object=new Object(3,3,1,1);
+	this.object=new Object(3,3,0.9,0.9);
 }
 
 
 World.prototype.step=function(){
-	this.object.step();
+	this.object.step(this);
 	this.camera.render(this);
 }
 
@@ -22,7 +22,14 @@ World.prototype.populateTiles=function(){
 			let color
 			if(x===0||x===this.width-1||y===0||y===this.height-1){//this makes a black border
 				color="black";
-			}else{color="white"}
+			}
+			else{
+				if(Math.random()<0.25){
+					color="black"
+				}else{
+					color="white"
+				}
+			}
 			this.tiles[x].push(new Tile(x,y,this.width,this.height,color));
 		}
 	}	
