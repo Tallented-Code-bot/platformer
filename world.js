@@ -5,10 +5,12 @@ function World(){
 
 	this.camera=new Camera(20,20);
 	this.populateTiles();	
+	this.object=new Object(3,3,1,1);
 }
 
 
 World.prototype.step=function(){
+	this.object.step();
 	this.camera.render(this);
 }
 
