@@ -6,10 +6,13 @@ function World(){
 	this.camera=new Camera(20,20);
 	this.populateTiles();	
 	this.object=new Object(3,3,0.9,0.9);
+	this.input=new Input();
+	this.input.init();
 }
 
 
 World.prototype.step=function(){
+	this.object.keyControl(this.input);
 	this.object.step(this);
 	this.camera.render(this);
 }
