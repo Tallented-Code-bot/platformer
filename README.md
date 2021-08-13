@@ -11,10 +11,11 @@ does not even know what a pixel is.
 ## Todo
 ### High importance
 
-- [ ] Tile based collision detection and response
+- [x] Tile based collision detection and response
 - [ ] Tile graphics
 - [ ] Player graphics
 - [ ] Enemies
+- [ ] Gravity
 ### Medium importance
 ### Low importance
 - [ ] Other traps
