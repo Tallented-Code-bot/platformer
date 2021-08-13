@@ -15,8 +15,8 @@ does not even know what a pixel is.
 - [ ] Tile graphics
 - [ ] Player graphics
 - [ ] Enemies
-- [ ] Gravity
-- [ ] Keyboard control in a separate object
+- [x] Gravity
+- [x] Keyboard control in a separate object
 ### Medium importance
 ### Low importance
 - [ ] Other traps
