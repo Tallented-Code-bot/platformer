@@ -17,6 +17,9 @@ Entity.prototype.step=function(world){
 
 	this.x+=this.xVel
 	this.y+=this.yVel;
+	this.yVel+=0.03;//gravity
+	this.xVel*=0.9;//friction
+	this.yVel*=0.9;//friction
 	this.checkCollisions(world);
 }
 
