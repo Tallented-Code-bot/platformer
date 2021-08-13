@@ -19,11 +19,6 @@ Input.prototype.init=function(){
 			case "s":this.down=true;break;
 		}
 	});
-}
-
-
-
-Input.prototype.init=function(){
 	window.addEventListener("keyup",(event)=>{
 		switch(event.key){
 			case "ArrowUp":this.up=false;break;
@@ -35,5 +30,5 @@ Input.prototype.init=function(){
 			case "w":this.up=false;break;
 			case "s":this.down=false;break;
 		}
-	})
+	});
 }
