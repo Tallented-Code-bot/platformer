@@ -7,7 +7,6 @@ function Object(x,y,width,height){
 	this.height=height;
 	this.xVel=0;
 	this.yVel=0;
-	this.keys();
 }
 
 
@@ -55,17 +54,6 @@ Object.prototype.checkCollisions=function(world){
 }
 
 
-Object.prototype.keys=function(){
-	window.addEventListener("keydown",(event)=>{
-		if(event.key==="a"){this.xVel=-0.1}
-		else if(event.key==="d"){this.xVel=0.1}
-		else{this.xVel=0}
-
-		if(event.key==="w"){this.yVel=-0.1}
-		else if(event.key==="s"){this.yVel=0.1}
-		else{this.yVel=0}
-	})
-}
 
 
 
