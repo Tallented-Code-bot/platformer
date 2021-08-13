@@ -1,6 +1,7 @@
 function Player(x,y,width,height){
-	Object.call(this,x,y,width,height);
+	Entity.call(this,x,y,width,height);
 }
+Player.prototype=Object.create(Entity.prototype);
 
 
 

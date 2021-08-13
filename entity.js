@@ -1,4 +1,4 @@
-function Object(x,y,width,height){
+function Entity(x,y,width,height){
 	this.x=x;
 	this.y=y;
 	this.oldX;
@@ -11,7 +11,7 @@ function Object(x,y,width,height){
 
 
 
-Object.prototype.step=function(world){
+Entity.prototype.step=function(world){
 	this.oldX=this.x;
 	this.oldY=this.y;
 
@@ -21,7 +21,7 @@ Object.prototype.step=function(world){
 }
 
 
-Object.prototype.checkCollisions=function(world){
+Entity.prototype.checkCollisions=function(world){
 	let top;
 	let left;
 	let right;
@@ -57,7 +57,7 @@ Object.prototype.checkCollisions=function(world){
 
 
 
-Object.prototype.routeCollision=function(color,tileX,tileY){
+Entity.prototype.routeCollision=function(color,tileX,tileY){
 	if(color==="black"){//all black tiles should be collided on all sides
 		if(this.collideWithTop(tileY)){return;}
 		if(this.collideWithLeft(tileX))return;
@@ -69,29 +69,29 @@ Object.prototype.routeCollision=function(color,tileX,tileY){
 
 
 
-Object.prototype.getLeft=function(){return this.x}
-Object.prototype.getRight=function(){return this.x+this.width}
-Object.prototype.getTop=function(){return this.y}
-Object.prototype.getBottom=function(){return this.y+this.height}
+Entity.prototype.getLeft=function(){return this.x}
+Entity.prototype.getRight=function(){return this.x+this.width}
+Entity.prototype.getTop=function(){return this.y}
+Entity.prototype.getBottom=function(){return this.y+this.height}
 
-Object.prototype.setLeft=function(left){this.x=left}
-Object.prototype.setRight=function(right){this.x=right-this.width}
-Object.prototype.setTop=function(top){this.y=top}
-Object.prototype.setBottom=function(bottom){this.y=bottom-this.height}
+Entity.prototype.setLeft=function(left){this.x=left}
+Entity.prototype.setRight=function(right){this.x=right-this.width}
+Entity.prototype.setTop=function(top){this.y=top}
+Entity.prototype.setBottom=function(bottom){this.y=bottom-this.height}
 
-Object.prototype.getOldLeft=function(){return this.oldX}
-Object.prototype.getOldRight=function(){return this.oldX+this.width}
-Object.prototype.getOldTop=function(){return this.oldY}
-Object.prototype.getOldBottom=function(){return this.oldY+this.height}
+Entity.prototype.getOldLeft=function(){return this.oldX}
+Entity.prototype.getOldRight=function(){return this.oldX+this.width}
+Entity.prototype.getOldTop=function(){return this.oldY}
+Entity.prototype.getOldBottom=function(){return this.oldY+this.height}
 
-Object.prototype.setOldLeft=function(left){this.oldX=left}
-Object.prototype.setOldBottom=function(bottom){this.oldY=bottom-this.height}
-Object.prototype.setOldRight=function(right){this.oldX=right-this.width}
-Object.prototype.setOldTop=function(top){this.oldY=top};
+Entity.prototype.setOldLeft=function(left){this.oldX=left}
+Entity.prototype.setOldBottom=function(bottom){this.oldY=bottom-this.height}
+Entity.prototype.setOldRight=function(right){this.oldX=right-this.width}
+Entity.prototype.setOldTop=function(top){this.oldY=top};
 
 
 
-Object.prototype.collideWithTop=function(tileTop){
+Entity.prototype.collideWithTop=function(tileTop){
 	if(this.getBottom()>tileTop&&this.getOldBottom()<=tileTop){
 		this.setBottom(tileTop-0.003125);
 		this.yVel=0;
@@ -101,7 +101,7 @@ Object.prototype.collideWithTop=function(tileTop){
 }
 
 
-Object.prototype.collideWithBottom=function(tileBottom){
+Entity.prototype.collideWithBottom=function(tileBottom){
 	if(this.getTop()<tileBottom&&this.getOldTop()>=tileBottom){
 		this.setTop(tileBottom);
 		this.yVel=0;
@@ -111,7 +111,7 @@ Object.prototype.collideWithBottom=function(tileBottom){
 }
 
 
-Object.prototype.collideWithLeft=function(tileLeft){
+Entity.prototype.collideWithLeft=function(tileLeft){
 	if(this.getRight()>tileLeft&&this.getOldRight()<=tileLeft){
 		this.setRight(tileLeft-0.0003125);
 		this.xVel=0;
@@ -120,7 +120,7 @@ Object.prototype.collideWithLeft=function(tileLeft){
 	return false;
 }
 
-Object.prototype.collideWithRight=function(tileRight){
+Entity.prototype.collideWithRight=function(tileRight){
 	if(this.getLeft()<tileRight&&this.getOldLeft()>=tileRight){
 		this.setLeft(tileRight);
 		this.xVel=0;

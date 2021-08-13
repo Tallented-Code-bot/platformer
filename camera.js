@@ -36,7 +36,7 @@ Camera.prototype.render=function(world){
 		}
 	}
 	this.context.fillStyle="red";
-	this.context.fillRect(world.object.x*this.tileWidth,world.object.y*this.tileHeight,world.object.width*this.tileWidth,world.object.height*this.tileHeight);
+	this.context.fillRect(world.player.x*this.tileWidth,world.player.y*this.tileHeight,world.player.width*this.tileWidth,world.player.height*this.tileHeight);
 }
 
 
