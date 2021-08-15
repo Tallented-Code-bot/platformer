@@ -18,25 +18,35 @@ Camera.prototype.render=function(world){
 	//render object
 	this.context.fillStyle="red";
 	//render blocks
-	for(let x=this.x;x<this.width+this.x;x++){
+	for(let x=this.x;x<this.width+this.x+1;x++){
+		// console.log(x);
 		for(let y=this.y;y<this.height+this.y;y++){
-			let position=this.convertToPixel(x,y);
-			if((x>world.width-1||x<0)||(y>world.height-1||y<0)){
+			if((Math.floor(x)>world.width-1||x<0)||(y>world.height-1||y<0)){
 				this.context.fillStyle="white";
 			}else{
-				this.context.fillStyle=world.tiles[x][y].color;
+				this.context.fillStyle=world.tiles[Math.floor(x)][Math.floor(y)].color;
 			}
 			
-			let xPosition=x*this.tileWidth-this.x*this.tileWidth;
-			let yPosition=y*this.tileHeight-this.y*this.tileHeight;
-			this.context.fillRect(xPosition,yPosition,this.tileWidth,this.tileHeight)	
+			let toDraw={
+				x:(x-this.x-(this.x-Math.trunc(this.x)))*this.tileWidth,
+				y:(y-this.y)*this.tileHeight,
+				width:this.tileWidth,
+				height:this.tileHeight
+			}
+			this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
 			//the formula to position tiles correctly
 			//the formula should be (tile x*32)-(camera x*32)
 			//this makes sense
 		}
 	}
 	this.context.fillStyle="red";
-	this.context.fillRect(world.player.x*this.tileWidth,world.player.y*this.tileHeight,world.player.width*this.tileWidth,world.player.height*this.tileHeight);
+	let toDraw={
+		x:(world.player.x-this.x)*this.tileWidth,
+		y:(world.player.y-this.y)*this.tileHeight,
+		width:world.player.width*this.tileWidth,
+		height:world.player.height*this.tileHeight
+	}
+	this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
 }
 
 

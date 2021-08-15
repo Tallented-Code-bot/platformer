@@ -1,6 +1,6 @@
 function World(){
 	this.tiles=[];	
-	this.width=15;//the world width in tiles
+	this.width=30;//the world width in tiles
 	this.height=10;//the world height in tiles
 
 	this.camera=new Camera(20,20);
@@ -14,6 +14,8 @@ function World(){
 World.prototype.step=function(){
 	this.player.keyControl(this.input);
 	this.player.step(this);
+	this.camera.x=this.player.x-this.camera.width/2;
+	if(this.camera.x<0)this.camera.x=0;
 	this.camera.render(this);
 }
 
