@@ -12,6 +12,7 @@ does not even know what a pixel is.
 ### High importance
 
 - [x] Tile based collision detection and response
+- [x] Scrolling
 - [ ] Tile graphics
 - [ ] Player graphics
 - [ ] Enemies
