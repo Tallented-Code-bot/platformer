@@ -18,7 +18,7 @@ function Camera(width,height){
 	this.tileTextures={
 		dirt:[32,32],
 		sky:[96,0],
-		grass_top:[32,32],
+		grass_top:[32,0],
 		grass_top_right:[64,0],
 		grass_top_left:[0,0],
 		grass_left:[0,32],
@@ -42,6 +42,7 @@ Camera.prototype.render=function(world){
 			}else{
 				this.context.fillStyle=world.tiles[Math.floor(x)][Math.floor(y)].color;
 			}
+			this.context.fillStyle="white";
 
 			let toDraw={
 				x:(x-this.x-(this.x-Math.trunc(this.x)))*this.tileWidth,
@@ -77,6 +78,11 @@ Camera.prototype.render=function(world){
 		height:world.player.height*this.tileHeight
 	}
 	this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
+
+
+
+	this.context.fillStyle="black";
+	this.context.fillText(world.availableTiles[world.tileIndex],10,10);
 }
 
 
