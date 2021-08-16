@@ -3,10 +3,16 @@ function Input(){
 	this.right=false;
 	this.up=false;
 	this.down=false;
+	this.mouseDown;
+	this.mouseX;
+	this.mouseY;
+	this.editing=false;
+	this.one=false;
+	this.two=false;
 }
 
 
-Input.prototype.init=function(){
+Input.prototype.init=function(canvas){
 	window.addEventListener("keydown",(event)=>{
 		switch(event.key){
 			case "ArrowUp":this.up=true;break;
@@ -17,6 +23,9 @@ Input.prototype.init=function(){
 			case "d":this.right=true;break;
 			case "w":this.up=true;break;
 			case "s":this.down=true;break;
+			case "0":this.editing=true;break;
+			case "1":this.one=true;break;
+			case "2":this.two=true;break;
 		}
 	});
 	window.addEventListener("keyup",(event)=>{
@@ -29,6 +38,21 @@ Input.prototype.init=function(){
 			case "d":this.right=false;break;
 			case "w":this.up=false;break;
 			case "s":this.down=false;break;
+			case "0":this.editing=false;break;
 		}
 	});
+
+	window.addEventListener("mousemove",(event)=>{
+		let rect=canvas.getBoundingClientRect();
+		this.mouseX=event.clientX-rect.left;
+		this.mouseY=event.clientY-rect.top;
+	});
+
+	window.addEventListener("mousedown",(event)=>{
+		this.mouseDown=true;
+	});
+
+	window.addEventListener("mouseup",(event)=>{
+		this.mouseDown=false;;
+	})
 }
