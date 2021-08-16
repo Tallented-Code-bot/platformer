@@ -35,23 +35,23 @@ Entity.prototype.checkCollisions=function(world){
 	left=Math.floor(this.getLeft());
 	top=Math.floor(this.getTop());
 	//get the color of that tile
-	color=world.tiles[left][top].color;
+	color=world.tiles[left][top];
 	this.routeCollision(color,left,top);
 
 	right=Math.floor(this.getRight());
 	top=Math.floor(this.getTop());
-	color=world.tiles[right][top].color;
+	color=world.tiles[right][top];
 	this.routeCollision(color,right,top);
 
 
 	left=Math.floor(this.getLeft());
 	bottom=Math.floor(this.getBottom());
-	color=world.tiles[left][bottom].color;
+	color=world.tiles[left][bottom];
 	this.routeCollision(color,left,bottom);
 
 	right=Math.floor(this.getRight());
 	bottom=Math.floor(this.getBottom());
-	color=world.tiles[right][bottom].color;
+	color=world.tiles[right][bottom];
 	this.routeCollision(color,right,bottom);
 
 }
@@ -60,13 +60,19 @@ Entity.prototype.checkCollisions=function(world){
 
 
 
-Entity.prototype.routeCollision=function(color,tileX,tileY){
-	if(color==="black"){//all black tiles should be collided on all sides
-		if(this.collideWithTop(tileY)){return;}
+Entity.prototype.routeCollision=function(tile,tileX,tileY){
+	if(tile.solidTop){
+		if(this.collideWithTop(tileY))return;
+	}
+	if(tile.solidLeft){
 		if(this.collideWithLeft(tileX))return;
-		if(this.collideWithRight(tileX+1))return;//the 1 represents a tile width/height
-		this.collideWithBottom(tileY+1);
-	}	
+	}
+	if(tile.solidRight){
+		if(this.collideWithRight(tileX+1))return;
+	}
+	if(tile.solidBottom){
+		if(this.collideWithBottom(tileY+1))return;
+	}
 }
 
 
