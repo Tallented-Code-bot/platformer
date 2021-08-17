@@ -38,7 +38,7 @@ World.prototype.step=function(){
 
 World.prototype.populateTiles=function(){
 	for(let x=0;x<this.width;x++){
-		this.tiles.push([]);
+		this.tiles.push([]);//add the list
 		for(let y=0;y<this.height;y++){
 			let color;
 			let type;
@@ -54,7 +54,7 @@ World.prototype.populateTiles=function(){
 					type="sky";
 				}
 			}
-			this.tiles[x].push(new Tile(x,y,this.width,this.height,color,type,{top:true,bottom:true,left:true,right:true}));
+			this.tiles[x].push(new Tile(x,y,this.width,this.height,color,type,{top:true,bottom:true,left:false,right:false}));
 		}
 	}	
 }
