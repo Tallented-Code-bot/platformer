@@ -34,6 +34,7 @@ World.prototype.step=function(){
 	if(this.camera.x<0)this.camera.x=0;
 	this.camera.render(this);
 	if(this.input.n)this.exportMap();
+	if(this.input.m)this.importMap();
 }
 
 
@@ -124,4 +125,18 @@ World.prototype.exportMap=function(){
 	window.URL.revokeObjectURL(url);
 	document.removeChild(anchor);
 
+}
+
+
+
+World.prototype.importMap=function(){
+	let input=document.getElementById("file-picker");
+	//this waits for a key to be pressed, and
+	//then shows the file picker dialog.
+
+	//it is impossible to directly show the dialog
+	//because it needs to be "user-activated"
+	window.addEventListener("keydown",()=>{
+		input.click();
+	},{once:true});
 }
