@@ -10,6 +10,7 @@ function Input(){
 	this.one=false;
 	this.two=false;
 	this.n=false;
+	this.m=false;
 }
 
 
@@ -28,6 +29,7 @@ Input.prototype.init=function(canvas){
 			case "1":this.one=true;break;
 			case "2":this.two=true;break;
 			case "n":this.n=true;break;
+			case "m":this.m=true;break;
 		}
 	});
 	window.addEventListener("keyup",(event)=>{
@@ -42,6 +44,7 @@ Input.prototype.init=function(canvas){
 			case "s":this.down=false;break;
 			case "0":this.editing=false;break;
 			case "n":this.n=false;break;
+			case "m":this.m=false;break;
 		}
 	});
 
