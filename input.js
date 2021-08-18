@@ -9,6 +9,7 @@ function Input(){
 	this.editing=false;
 	this.one=false;
 	this.two=false;
+	this.n=false;
 }
 
 
@@ -26,6 +27,7 @@ Input.prototype.init=function(canvas){
 			case "0":this.editing=true;break;
 			case "1":this.one=true;break;
 			case "2":this.two=true;break;
+			case "n":this.n=true;break;
 		}
 	});
 	window.addEventListener("keyup",(event)=>{
@@ -39,6 +41,7 @@ Input.prototype.init=function(canvas){
 			case "w":this.up=false;break;
 			case "s":this.down=false;break;
 			case "0":this.editing=false;break;
+			case "n":this.n=false;break;
 		}
 	});
 
