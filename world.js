@@ -23,6 +23,21 @@ function World(){
 		grass_left:{top:false,bottom:false,left:true,right:false}
 	}
 	this.populateTiles();
+	this.camera.canvas.addEventListener("dragenter",(event)=>{
+		event.stopPropagation();
+		event.preventDefault();
+	},false);
+	this.camera.canvas.addEventListener("dragover",(event)=>{
+		event.stopPropagation();
+		event.preventDefault();
+	},false);
+	this.camera.canvas.addEventListener("drop",(event)=>{
+		event.stopPropagation();
+		event.preventDefault();
+		const dt=event.dataTransfer;
+		const files=dt.files;
+		this.importMap(files);
+	})
 }
 
 
@@ -106,7 +121,7 @@ World.prototype.exportMap=function(){
 		toSave.tiles.push([]);
 		for(let y=0;y<this.tiles[x].length;y++){
 			toSave.tiles[x].push({
-				type:this.tiles.type,
+				tileType:"grass_left",
 				solidLeft:this.tiles[x][y].solidLeft,
 				solidRight:this.tiles[x][y].solidRight,
 				solidTop:this.tiles[x][y].solidTop,
@@ -131,20 +146,63 @@ World.prototype.exportMap=function(){
 
 
 
-World.prototype.importMap=function(){
-	let input=document.getElementById("file-picker");                         
+World.prototype.importMap=function(files){
+	for(let i=0;i<files.length;i++){
+		const file=files[i];
+		console.log(file);
+
+		const reader=new FileReader();
+		reader.readAsText(file);
+		reader.onload=function(){
+			// console.log(reader.result);
+
+			let object=JSON.parse(reader.result);
+			this.width=object.width;
+			this.height=object.height;
+			console.log(`Set width and height to ${this.width} and ${this.height}`);
+			this.camera=new Camera(object.camera.width,object.camera.height);
+			console.log(`Set camera`);
+			this.player=new Player(object.player.x,object.player.y,object.player.width,object.player.height);
+			console.log(`Set player`);
+			this.tiles=[];
+			console.log(`Clear tiles`);
+			for(let x=0;x<object.tiles.length;x++){
+				this.tiles.push([]);
+				for(let y=0;y<object.tiles[x].length;y++){
+					this.tiles[x].push(new Tile(x,y,1,1,"black",object.tiles[x][y].tileType,{
+						top:object.tiles[x][y].solidTop,
+						bottom:object.tiles[x][y].solidBottom,
+						left:object.tiles[x][y].solidLeft,
+						right:object.tiles[x][y].solidRight
+					}));
+					console.log(`Create ${this.tiles[x][y].type} tile at x ${x} and y ${y}`);
+				}
+			}
+			console.log(`Create tiles:${this.tiles}`);
+
+		}
+	}
+
+
+
+
+
+
+	// let input=document.getElementById("file-picker");
+	// let dropbox=this.camera.canvas;
+	   
 	//this waits for a key to be pressed, and
 	//then shows the file picker dialog.
 
 	//it is impossible to directly show the dialog
 	//because it needs to be "user-activated"	
-	window.addEventListener("keydown",()=>{
-		input.click();
-	},{once:true});
+	// window.addEventListener("keydown",()=>{
+	// 	input.click();
+	// },{once:true});
 
 
-	input.addEventListener("change",(event)=>{
-		let fileList=event.target.files;
-		alert(fileList);
-	})
+	// input.addEventListener("change",(event)=>{
+	// 	let fileList=event.target.files;
+	// 	alert(fileList);
+	// })
 }
