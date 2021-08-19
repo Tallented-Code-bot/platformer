@@ -18,6 +18,9 @@ does not even know what a pixel is.
 - [ ] Enemies
 - [x] Gravity
 - [x] Keyboard control in a separate object
+- [ ] Start screen
+- [ ] A HUD
+- [ ] World saving and loading
 ### Medium importance
 ### Low importance
 - [ ] Other traps
