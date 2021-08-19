@@ -4,7 +4,7 @@ function World(){
 	this.height=10;//the world height in tiles
 
 	this.camera=new Camera(20,10);
-	this.populateTiles();	
+	
 	this.player=new Player(3,3,0.9,0.9);
 	this.input=new Input();
 	this.input.init(this.camera.canvas);
@@ -22,6 +22,7 @@ function World(){
 		grass_right:{top:false,bottom:false,left:false,right:true},
 		grass_left:{top:false,bottom:false,left:true,right:false}
 	}
+	this.populateTiles();
 }
 
 
@@ -44,19 +45,20 @@ World.prototype.populateTiles=function(){
 		for(let y=0;y<this.height;y++){
 			let color;
 			let type;
-			if(x===0||x===this.width-1||y===0||y===this.height-1){//this makes a black border
-				color="black";
-			}
+			if(x===0)type="grass_right";
+			else if(x===this.width-1)type="grass_left";
+			else if(y===this.height-1)type="grass_top";
 			else{
 				if(Math.random()<0.25){
 					color="black";
-					type="dirt";
+					type="grass_top";
 				}else{
 					color="white";
 					type="sky";
 				}
 			}
-			this.tiles[x].push(new Tile(x,y,this.width,this.height,color,type,{top:true,bottom:true,left:false,right:false}));
+
+			this.tiles[x].push(new Tile(x,y,this.width,this.height,color,type,this.solidTiles[type]));
 		}
 	}	
 }
@@ -130,13 +132,19 @@ World.prototype.exportMap=function(){
 
 
 World.prototype.importMap=function(){
-	let input=document.getElementById("file-picker");
+	let input=document.getElementById("file-picker");                         
 	//this waits for a key to be pressed, and
 	//then shows the file picker dialog.
 
 	//it is impossible to directly show the dialog
-	//because it needs to be "user-activated"
+	//because it needs to be "user-activated"	
 	window.addEventListener("keydown",()=>{
 		input.click();
 	},{once:true});
+
+
+	input.addEventListener("change",(event)=>{
+		let fileList=event.target.files;
+		alert(fileList);
+	})
 }
