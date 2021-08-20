@@ -8,6 +8,10 @@ separated from each other.  For example, the camera class is
 completely separated from the player class, and the player class
 does not even know what a pixel is.
 
+## How to play
+
+&#11013;&#11015;&#11014;&#10145;:Move around.
+
 ## Todo
 ### High importance
 
