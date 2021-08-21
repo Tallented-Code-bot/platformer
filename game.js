@@ -12,20 +12,30 @@ function Game(){
 	this.gui.style.height=this.world.camera.canvas.height+"px";
 	this.gui.style.border="2px black double";
 
-	this.startMenu=document.getElementById("start_menu");	
-	this.startMenu.getElementsByTagName("button")[0].onclick=this.start;
+	this.startMenu=document.getElementById("start_menu");
+	this.startMenu.getElementsByTagName("button")[0].addEventListener("click",()=>{this.start();});
+
+	this.pauseMenu=document.getElementById("pause_play");
+	this.pauseMenu.getElementsByTagName("button")[0].addEventListener("click",(e)=>{e.preventDefault();this.stop();});
 }
 
 
 
 
 Game.prototype.start=function(){
-	this.state="playing";		
+	this.state="playing";
 	this.startMenu.style.display="none";
+	window.requestAnimationFrame(()=>{this.gameLoop()});
 }
 
 
 Game.prototype.stop=function(){
-
+	this.state="paused";
 }
 
+Game.prototype.gameLoop=function(){
+	this.world.step();
+	if(this.state==="playing"){
+		window.requestAnimationFrame(()=>{this.gameLoop()});
+	}
+}

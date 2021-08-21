@@ -27,3 +27,15 @@
 	padding-left:30px;
 	padding-right:30px;
 }
+
+#pause_play{
+	margin:0 auto;
+	width:20%;
+	height:20%;
+}
+
+#pause_play button{
+	margin:0 auto;
+	display:block;
+	
+}
