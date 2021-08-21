@@ -9,6 +9,9 @@ function World() {
   this.input = new Input();
   this.input.init(this.camera.canvas);
 
+
+  this.enemies=[new Enemy(4,3,0.9,0.9)];
+
   this.editing = false;
   this.availableTiles = [
     "dirt",
@@ -61,6 +64,9 @@ World.prototype.step = function () {
   // if(this.editing)
   this.editMap();
   this.player.step(this);
+  this.enemies.forEach((enemy)=>{
+	  enemy.step(this);
+  })
   this.camera.x = this.player.x - this.camera.width / 2;
   if (this.camera.x < 0) this.camera.x = 0;
   this.camera.render(this);
