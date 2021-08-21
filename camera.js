@@ -82,13 +82,15 @@ Camera.prototype.render=function(world){
 
 
 	this.context.fillStyle="black";
-	toDraw={
-		x:(world.enemies[0].x-this.x)*this.tileWidth,
-		y:(world.enemies[0].y-this.y)*this.tileHeight,
-		width:world.enemies[0].width*this.tileWidth,
-		height:world.enemies[0].height*this.tileHeight
-	}
-	this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
+	world.enemies.forEach((enemy)=>{
+		toDraw={
+			x:(enemy.x-this.x)*this.tileWidth,
+			y:(enemy.y-this.y)*this.tileHeight,
+			width:(enemy.width)*this.tileWidth,
+			height:(enemy.height)*this.tileHeight
+		}
+		this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
+	});
 
 
 
