@@ -9,7 +9,24 @@
 </head>
 <body>
 	<input type="file" style="display:none;" id="file-picker">
-	<canvas id="canvas"></canvas>
+	<div id="game">
+		<canvas id="game_canvas"></canvas>
+		<div id="gui">
+			<div id="start_menu">
+				<h1>Welcome</h1>
+				<button>Play</button>
+			</div>
+		</div>
+		<!-- <div id="title_screen">
+			<h1>Game</h1>
+			<button>Start</button>
+
+		</div> -->
+	</div>
+
+
+
+
 	<!-- <script src="/inline-console.min.js"></script>  -->
 	<script src="tile.js"></script>
 	<script src="camera.js"></script>
@@ -17,6 +34,7 @@
 	<script src="entity.js"></script>
 	<script src="input.js"></script>
 	<script src="player.js"></script>
+	<script src="game.js"></script>
 	<script src="main.js"></script>
 </body>
 </html>
