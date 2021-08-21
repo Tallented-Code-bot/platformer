@@ -27,7 +27,7 @@ function World() {
   this.solidTiles = {
     dirt: { top: false, bottom: false, left: false, right: false },
     sky: { top: false, bottom: false, left: false, right: false },
-    grass_top: { top: true, bottom: true, left: false, right: false },
+    grass_top: { top: true, bottom: true, left: true, right: true },
     grass_top_right: { top: true, bottom: false, right: true, left: false },
     grass_top_left: { top: true, bottom: false, right: false, left: true },
     grass_right: { top: false, bottom: false, left: false, right: true },
