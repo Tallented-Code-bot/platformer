@@ -11,6 +11,8 @@ does not even know what a pixel is.
 ## How to play
 
 &#11013;&#11015;&#11014;&#10145;:Move around.
+M:Save map to a json file
+N:Load map from a json file
 
 ## Todo
 ### High importance
