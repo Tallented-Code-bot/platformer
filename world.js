@@ -222,7 +222,7 @@ World.prototype.importMap = function (files) {
           );
         }
       }
-      console.log(`Create tiles:${this.tiles}`);
+      console.log(this.tiles);
     };
   }
 
