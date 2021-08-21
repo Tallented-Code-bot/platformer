@@ -82,6 +82,17 @@ Camera.prototype.render=function(world){
 
 
 	this.context.fillStyle="black";
+	toDraw={
+		x:(world.enemies[0].x-this.x)*this.tileWidth,
+		y:(world.enemies[0].y-this.y)*this.tileHeight,
+		width:world.enemies[0].width*this.tileWidth,
+		height:world.enemies[0].height*this.tileHeight
+	}
+	this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
+
+
+
+	this.context.fillStyle="black";
 	this.context.fillText(world.availableTiles[world.tileIndex],10,10);
 }
 
