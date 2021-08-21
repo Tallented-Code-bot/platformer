@@ -9,7 +9,7 @@ function Camera(width,height){
 	this.y=0;//the camera y position, in tiles
 	this.width=width;//the camera width in tiles
 	this.height=height;//the camera height in tiles
-	this.canvas=document.getElementById("canvas");
+	this.canvas=document.getElementById("game_canvas");
 	this.context=this.canvas.getContext("2d");
 	this.tileWidth=32;//the width in pixels for 1 tile
 	this.tileHeight=32;//the height in pixels for 1 tile
