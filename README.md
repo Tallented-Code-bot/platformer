@@ -10,23 +10,26 @@ does not even know what a pixel is.
 
 ## How to play
 
-&#11013;&#11015;&#11014;&#10145;:Move around.
-M:Save map to a json file
-N:Load map from a json file
+&#11013;&#11015;&#11014;&#10145;:Move around.<br>
+M:Save map to a json file<br>
 
 ## Todo
 ### High importance
 
 - [x] Tile based collision detection and response
 - [x] Scrolling
-- [ ] Tile graphics
+- [x] Tile graphics
 - [ ] Player graphics
-- [ ] Enemies
+- [x] Enemies
+- [ ] Enemy AI
 - [x] Gravity
 - [x] Keyboard control in a separate object
-- [ ] Start screen
+- [x] Start screen
 - [ ] A HUD
-- [ ] World saving and loading
+- [x] World saving and loading
 ### Medium importance
+- [ ] Player walljumping
+- [ ] Collectables
+- [ ] Special tiles (such as bouncy tiles)
 ### Low importance
 - [ ] Other traps
