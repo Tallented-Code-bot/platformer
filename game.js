@@ -13,10 +13,27 @@ function Game(){
 	this.gui.style.border="2px black double";
 
 	this.startMenu=document.getElementById("start_menu");
-	this.startMenu.getElementsByTagName("button")[0].addEventListener("click",()=>{this.start();});
 
 	this.pauseMenu=document.getElementById("pause_play");
 	this.pauseMenu.getElementsByTagName("button")[0].addEventListener("click",(e)=>{e.preventDefault();this.stop();});
+
+	this.startButton=document.querySelector("#start_menu button");
+	this.startButton.addEventListener("click",(e)=>{this.start();});
+
+
+	this.fileInput=document.querySelector("#start_menu input");
+	this.fileInput.addEventListener("change",(event)=>{
+		const fileList=Array.from(event.target.files);
+		fileList.forEach((file)=>{
+			const reader=new FileReader();
+			reader.addEventListener("load",(event)=>{
+				let worldObject=JSON.parse(event.target.result);
+				this.world=new World(worldObject);
+				this.startButton.click();
+			})
+			reader.readAsText(file);
+		})
+	})
 }
 
 
