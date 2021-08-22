@@ -1,11 +1,23 @@
-function World() {
+function World(options={}) {
   this.tiles = [];
-  this.width = 30; //the world width in tiles
-  this.height = 10; //the world height in tiles
+  this.width = options.width||30; //the world width in tiles
+  this.height = options.height||10; //the world height in tiles
 
-  this.camera = new Camera(20, 10);
 
-  this.player = new Player(3, 3, 0.9, 0.9);
+  if("camera" in options){
+	  this.camera=new Camera(options.camera.width||20,options.camera.height||10);
+  }else{
+	  this.camera=new Camera(20,10);
+  }
+
+
+if("player" in options){
+	this.player=new Player(options.player.x||3,options.player.y||3,options.player.width||0.9,options.player.height||0.9);
+}else{
+	this.player = new Player(3, 3, 0.9, 0.9);
+}
+
+
   this.input = new Input();
   this.input.init(this.camera.canvas);
 
@@ -33,7 +45,13 @@ function World() {
     grass_right: { top: false, bottom: false, left: false, right: true },
     grass_left: { top: false, bottom: false, left: true, right: false }
   };
-  this.populateTiles();
+
+
+  if("tiles" in options){
+	this.populateTiles({tiles:options.tiles})
+  }else{
+	this.populateTiles();
+  }
   this.camera.canvas.addEventListener(
     "dragenter",
     (event) => {
@@ -74,38 +92,85 @@ World.prototype.step = function () {
   if (this.input.m) this.importMap();
 };
 
-World.prototype.populateTiles = function () {
+World.prototype.populateTiles = function (options={}) {
+	if("tiles" in options){
+		let tiles=options.tiles;
+		this.tiles=[];
+		for(let x=0;x<tiles.length;x++){
+			this.tiles.push([]);
+			for(let y=0;y<tiles[x].length;y++){
+				this.tiles[x].push(new Tile(
+					x,
+					y,
+					1,
+					1,
+					"black",
+					tiles[x][y].tileType,
+					{
+						top:tiles[x][y].solidTop,
+						bottom:tiles[x][y].solidBottom,
+						left:tiles[x][y].solidLeft,
+						right:tiles[x][y].solidRight
+					}
+				));
+			}	
+		}
+		return;	
+	}
+
+	this.tiles=[];
   for (let x = 0; x < this.width; x++) {
     this.tiles.push([]); //add the list
     for (let y = 0; y < this.height; y++) {
-      let color;
-      let type;
-      if (x === 0) type = "grass_right";
-      else if (x === this.width - 1) type = "grass_left";
-      else if (y === this.height - 1) type = "grass_top";
-      else {
-        if (Math.random() < 0.25) {
-          color = "black";
-          type = "grass_top";
-        } else {
-          color = "white";
-          type = "sky";
-        }
-      }
+		let color;
+		let type;
+		// if("tiles" in options){
+		// 	this.tiles.push(new Tile(
+		// 		x,
+		// 		y,
+		// 		1,
+		// 		1,
+		// 		"black",
+		// 		options.tiles[x][y].tileType,
+		// 		{
+		// 			top:options.tiles[x][y].solidTop,
+		// 			bottom:options.tiles[x][y].solidBottom,
+		// 			left:options.tiles[x][y].solidLeft,
+		// 			right:options.tiles[x][y].solidRight
+		// 		}
+		// 	));
+			
+		// }
+		if (x === 0) type = "grass_right";
+		else if (x === this.width - 1) type = "grass_left";
+		else if (y === this.height - 1) type = "grass_top";
+		else {
+			if (Math.random() < 0.25) {
+				color = "black";
+				type = "grass_top";
+			} else {
+				color = "white";
+				type = "sky";
+			}
+		}
 
-      this.tiles[x].push(
-        new Tile(
-          x,
-          y,
-          this.width,
-          this.height,
-          color,
-          type,
-          this.solidTiles[type]
-        )
-      );
-    }
+		this.tiles[x].push(
+			new Tile(
+				x,
+				y,
+				this.width,
+				this.height,
+				color,
+				type,
+				this.solidTiles[type]
+			)
+		);
+	}
+	
   }
+
+
+
 };
 
 World.prototype.editMap = function () {
@@ -185,67 +250,4 @@ World.prototype.exportMap = function () {
   anchor.click();
   window.URL.revokeObjectURL(url);
   document.removeChild(anchor);
-};
-
-World.prototype.importMap = function (files) {
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    console.log(file);
-
-    const reader = new FileReader();
-    reader.readAsText(file);
-    reader.onload = function () {
-      // console.log(reader.result);
-
-      let object = JSON.parse(reader.result);
-      this.width = object.width;
-      this.height = object.height;
-      console.log(`Set width and height to ${this.width} and ${this.height}`);
-      this.camera = new Camera(object.camera.width, object.camera.height);
-      console.log(`Set camera`);
-      this.player = new Player(
-        object.player.x,
-        object.player.y,
-        object.player.width,
-        object.player.height
-      );
-      console.log(`Set player`);
-      this.tiles = [];
-      console.log(`Clear tiles`);
-      for (let x = 0; x < object.tiles.length; x++) {
-        this.tiles.push([]);
-        for (let y = 0; y < object.tiles[x].length; y++) {
-          this.tiles[x].push(
-            new Tile(x, y, 1, 1, "black", object.tiles[x][y].tileType, {
-              top: object.tiles[x][y].solidTop,
-              bottom: object.tiles[x][y].solidBottom,
-              left: object.tiles[x][y].solidLeft,
-              right: object.tiles[x][y].solidRight
-            })
-          );
-          console.log(
-            `Create ${this.tiles[x][y].type} tile at x ${x} and y ${y}`
-          );
-        }
-      }
-      console.log(this.tiles);
-    };
-  }
-
-  // let input=document.getElementById("file-picker");
-  // let dropbox=this.camera.canvas;
-
-  //this waits for a key to be pressed, and
-  //then shows the file picker dialog.
-
-  //it is impossible to directly show the dialog
-  //because it needs to be "user-activated"
-  // window.addEventListener("keydown",()=>{
-  // 	input.click();
-  // },{once:true});
-
-  // input.addEventListener("change",(event)=>{
-  // 	let fileList=event.target.files;
-  // 	alert(fileList);
-  // })
 };
