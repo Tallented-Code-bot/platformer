@@ -20,9 +20,16 @@ if("player" in options){
 
   this.input = new Input();
   this.input.init(this.camera.canvas);
-
-
+	this.enemies=[];
+	if("enemies" in options){
+		console.log(this.enemies);
+		for(let i=0;i<options.enemies.length;i++){
+			this.enemies.push(new Enemy(options.enemies[i].x,options.enemies[i].y,options.enemies[i].width,options.enemies[i].height));
+		}
+		console.log(this.enemies);
+	}else{
   this.enemies=[new Enemy(4,3,0.9,0.9)];
+	}
 
   this.editing = false;
   this.availableTiles = [
@@ -202,7 +209,6 @@ World.prototype.editMap = function (input) {
 };
 
 World.prototype.exportMap = function () {
-  alert("preparing to save");
   let toSave = {}; //this is the object that we will be saving
   toSave.width = this.width;
   toSave.height = this.height;
@@ -216,6 +222,15 @@ World.prototype.exportMap = function () {
     width: this.player.width,
     height: this.player.height
   };
+  toSave.enemies=[];
+  for(let i=0;i<this.enemies.length;i++){
+	  toSave.enemies.push({
+		  x:this.enemies[i].x,
+		  y:this.enemies[i].y,
+		  width:this.enemies[i].width,
+		  height:this.enemies[i].height
+	  })
+  }
   toSave.tiles = [];
 
   for (let x = 0; x < this.tiles.length; x++) {
