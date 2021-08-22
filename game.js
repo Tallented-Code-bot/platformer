@@ -7,6 +7,10 @@ function Game(){
 
 	this.state="title_screen";
 	this.world=new World();
+
+	this.input=new Input();
+	this.input.init(this.world.camera.canvas);
+
 	this.gui=document.getElementById("gui");
 	this.gui.style.width=this.world.camera.canvas.width+"px";
 	this.gui.style.height=this.world.camera.canvas.height+"px";
@@ -51,7 +55,7 @@ Game.prototype.stop=function(){
 }
 
 Game.prototype.gameLoop=function(){
-	this.world.step();
+	this.world.step(this.input);
 	if(this.state==="playing"){
 		window.requestAnimationFrame(()=>{this.gameLoop()});
 	}

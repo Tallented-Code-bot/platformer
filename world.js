@@ -77,10 +77,10 @@ if("player" in options){
   });
 }
 
-World.prototype.step = function () {
-  this.player.keyControl(this.input);
+World.prototype.step = function (input) {
+  this.player.keyControl(input);
   // if(this.editing)
-  this.editMap();
+  this.editMap(input);
   this.player.step(this);
   this.enemies.forEach((enemy)=>{
 	  enemy.step(this);
@@ -88,8 +88,6 @@ World.prototype.step = function () {
   this.camera.x = this.player.x - this.camera.width / 2;
   if (this.camera.x < 0) this.camera.x = 0;
   this.camera.render(this);
-  if (this.input.n) this.exportMap();
-  if (this.input.m) this.importMap();
 };
 
 World.prototype.populateTiles = function (options={}) {
@@ -173,23 +171,23 @@ World.prototype.populateTiles = function (options={}) {
 
 };
 
-World.prototype.editMap = function () {
-  if (this.input.one) {
-    this.input.one = false;
+World.prototype.editMap = function (input) {
+  if (input.one) {
+    input.one = false;
     this.tileIndex--;
     if (this.tileIndex < 0) this.tileIndex = 0;
   }
-  if (this.input.two) {
-    this.input.two = false;
+  if (input.two) {
+    input.two = false;
     this.tileIndex++;
     if (this.tileIndex > this.availableTiles.length - 1)
       this.tileIndex = this.availableTiles.length - 1;
   }
-  if (this.input.mouseDown) {
+  if (input.mouseDown) {
     let x = Math.floor(
-      this.input.mouseX / this.camera.tileWidth + this.camera.x
+      input.mouseX / this.camera.tileWidth + this.camera.x
     );
-    let y = Math.floor(this.input.mouseY / this.camera.tileHeight);
+    let y = Math.floor(input.mouseY / this.camera.tileHeight);
     this.tiles[x][y] = new Tile(
       x,
       y,
