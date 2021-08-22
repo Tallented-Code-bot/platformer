@@ -56,6 +56,11 @@ Game.prototype.stop=function(){
 
 Game.prototype.gameLoop=function(){
 	this.world.step(this.input);
+	if(this.input.m){
+		console.log("hi");
+		this.stop();
+		this.world.exportMap();
+	}
 	if(this.state==="playing"){
 		window.requestAnimationFrame(()=>{this.gameLoop()});
 	}
