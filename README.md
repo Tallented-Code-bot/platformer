@@ -33,3 +33,14 @@ M:Save map to a json file<br>
 - [ ] Special tiles (such as bouncy tiles)
 ### Low importance
 - [ ] Other traps
+
+## Ideas
+### Player Ideas
+### Enemy Ideas
+- An hourglass that slowly runs out of sand.  When the sand runs out,
+something happens.  The player might be able to do something to slow
+or stop the sand, or flip the enemy over to run the other way.
+
+- A ball/boulder-like enemy that rolls and tries to crush you.  This
+enemy may not work well until there are slopes in the game.
+
