@@ -37,7 +37,10 @@ function World(options = {}) {
 		"grass_top_right",
 		"grass_top_left",
 		"grass_right",
-		"grass_left"
+		"grass_left",
+		"grass_bottom",
+		"grass_bottom_left",
+		"grass_bottom_right"
 	];
 	this.tileIndex = 2;
 
@@ -48,7 +51,10 @@ function World(options = {}) {
 		grass_top_right: { top: true, bottom: false, right: true, left: false },
 		grass_top_left: { top: true, bottom: false, right: false, left: true },
 		grass_right: { top: false, bottom: false, left: false, right: true },
-		grass_left: { top: false, bottom: false, left: true, right: false }
+		grass_left: { top: false, bottom: false, left: true, right: false },
+		grass_bottom:{top:false,bottom:true,left:false,right:false},
+		grass_bottom_left:{top:false,bottom:true,left:true,right:false},
+		grass_bottom_right:{top:false,bottom:true,left:false,right:true}
 	};
 
 

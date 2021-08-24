@@ -22,7 +22,10 @@ function Camera(width,height){
 		grass_top_right:[64,0],
 		grass_top_left:[0,0],
 		grass_left:[0,32],
-		grass_right:[64,32]
+		grass_right:[64,32],
+		grass_bottom:[32,64],
+		grass_bottom_left:[0,64],
+		grass_bottom_right:[64,64]
 	}
 }
 
