@@ -153,6 +153,7 @@ World.prototype.populateTiles = function (options = {}) {
 			if (x === 0) type = "grass_right";
 			else if (x === this.width - 1) type = "grass_left";
 			else if (y === this.height - 1) type = "grass_top";
+			else if(y===0)type="grass_bottom";
 			else {
 				if (Math.random() < 0.25) {
 					color = "black";
