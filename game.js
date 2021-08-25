@@ -17,12 +17,27 @@ function Game(){
 	this.gui.style.border="2px black double";
 
 	this.startMenu=document.getElementById("start_menu");
+	this.startMenu.startButton=this.startMenu.querySelector("button");
+	// this.startButton=document.querySelector("#start_menu button");
+	this.startMenu.startButton.addEventListener("click",(e)=>{this.start();});
+	
 
 	this.pauseMenu=document.getElementById("pause_play");
 	this.pauseMenu.getElementsByTagName("button")[0].addEventListener("click",(e)=>{e.preventDefault();this.stop();});
 
-	this.startButton=document.querySelector("#start_menu button");
-	this.startButton.addEventListener("click",(e)=>{this.start();});
+	this.instructionMenu=document.getElementById("instruction_menu");
+	this.instructionMenu.homeButton=this.instructionMenu.querySelector("button");
+	this.instructionMenu.homeButton.addEventListener("click",(event)=>{
+		this.instructionMenu.style.display="none";
+		this.startMenu.style.display="block";
+	})
+
+
+	this.startMenu.instructionButton=this.startMenu.querySelectorAll("button")[1];
+	this.startMenu.instructionButton.addEventListener("click",(event)=>{
+		this.startMenu.style.display="none";
+		this.instructionMenu.style.display="block";
+	})
 
 
 	this.fileInput=document.querySelector("#start_menu input");

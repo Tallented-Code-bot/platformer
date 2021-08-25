@@ -12,10 +12,7 @@
 	position:absolute;
 }
 
-#start_menu{
-	/* position:relative; */
-	/* bottom:70%; */
-	/* left:40%; */
+/* #start_menu{
 	margin:0 auto;
 	width:20%;
 	height:20%;
@@ -26,6 +23,31 @@
 	display:block;
 	padding-left:30px;
 	padding-right:30px;
+} */
+
+
+
+	/* position:relative; */
+	/* bottom:70%; */
+	/* left:40%; */
+
+.centered{
+	margin: 0 auto;
+	width: 20%;
+	height:20%;
+}
+
+.centered button{
+	margin:0 auto;
+	display:block;
+	padding-left:30px;
+	padding-right:30px;
+}
+
+.centered p{
+	/* word-wrap:unset; */
+	white-space: nowrap;
+	text-align: center;
 }
 
 #pause_play{

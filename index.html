@@ -12,11 +12,21 @@
 	<div id="game">
 		<canvas id="game_canvas"></canvas>
 		<div id="gui">
-			<div id="start_menu">
+			<div id="start_menu" class="centered">
 				<h1>Welcome</h1>
 				<button>Play</button>
+				<button>Instructions</button>
 				<button onclick="document.getElementById('input').click()">Load world</button>
 				<input type="file" accept="application/json" id="input" style="display:none;">
+			</div>
+			<div id="instruction_menu" class="centered" style="display:none;">
+				<h1>Instructions</h1>
+				<p>
+					WASD or arrow keys to move.<br>
+					M to save game.<br><br>
+					Have fun!
+				</p>
+				<button>Home</button>
 			</div>
 			<div id="pause_play" style="display:none;">
 				<button>&#x23F8</button>
