@@ -5,8 +5,7 @@ function Camera(width,height){
 	this.image.addEventListener("load",(event)=>{
 		this.imageLoadedYet=true;
 	})
-	this.x=0;//the camera x position, in tiles
-	this.y=0;//the camera y position, in tiles
+	this.position=new Vector(0,0);
 	this.width=width;//the camera width in tiles
 	this.height=height;//the camera height in tiles
 	this.canvas=document.getElementById("game_canvas");
@@ -36,9 +35,9 @@ Camera.prototype.render=function(world){
 	//render object
 	this.context.fillStyle="red";
 	//render blocks
-	for(let x=this.x;x<this.width+this.x+1;x++){
+	for(let x=this.position.x;x<this.width+this.position.x+1;x++){
 		// console.log(x);
-		for(let y=this.y;y<this.height+this.y;y++){
+		for(let y=this.position.y;y<this.height+this.position.y;y++){
 			if((Math.floor(x)>world.width-1||x<0)||(y>world.height-1||y<0)){
 				this.context.fillStyle="white";
 				continue;
@@ -48,8 +47,8 @@ Camera.prototype.render=function(world){
 			this.context.fillStyle="white";
 
 			let toDraw={
-				x:(x-this.x-(this.x-Math.trunc(this.x)))*this.tileWidth,
-				y:(y-this.y)*this.tileHeight,
+				x:(x-this.position.x-(this.position.x-Math.trunc(this.position.x)))*this.tileWidth,
+				y:(y-this.position.y)*this.tileHeight,
 				width:this.tileWidth,
 				height:this.tileHeight,
 			}
@@ -75,8 +74,8 @@ Camera.prototype.render=function(world){
 	}
 	this.context.fillStyle="red";
 	let toDraw={
-		x:(world.player.x-this.x)*this.tileWidth,
-		y:(world.player.y-this.y)*this.tileHeight,
+		x:(world.player.position.x-this.position.x)*this.tileWidth,
+		y:(world.player.position.y-this.position.y)*this.tileHeight,
 		width:world.player.width*this.tileWidth,
 		height:world.player.height*this.tileHeight
 	}
@@ -87,8 +86,8 @@ Camera.prototype.render=function(world){
 	this.context.fillStyle="black";
 	world.enemies.forEach((enemy)=>{
 		toDraw={
-			x:(enemy.x-this.x)*this.tileWidth,
-			y:(enemy.y-this.y)*this.tileHeight,
+			x:(enemy.position.x-this.position.x)*this.tileWidth,
+			y:(enemy.position.y-this.position.y)*this.tileHeight,
 			width:(enemy.width)*this.tileWidth,
 			height:(enemy.height)*this.tileHeight
 		}

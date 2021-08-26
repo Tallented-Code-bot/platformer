@@ -6,7 +6,7 @@ Enemy.prototype=Object.create(Entity.prototype);
 
 
 Enemy.prototype.doAi=function(world){
-	let d=world.player.x-this.x;
+	let d=world.player.position.x-this.position.x;
 	if(-1<=d&&d<=1){
 		//do nothing
 	}
@@ -19,21 +19,18 @@ Enemy.prototype.doAi=function(world){
 
 Enemy.prototype.step=function(world){
 	this.doAi(world);
-	this.oldX=this.x;
-	this.oldY=this.y;
+	this.oldPosition=new Vector(this.position.x,this.position.y);
 
-	this.x+=this.xVel
-	this.y+=this.yVel;
-	this.yVel+=0.03;//gravity
-	this.xVel*=0.9;//friction
-	this.yVel*=0.9;//friction
+	this.position.addTo(this.velocity);
+	this.velocity.addTo(new Vector(0,0.03));
+	this.velocity.multTo(new Vector(0.9,0.9));
 	this.checkCollisions(world);
 }
 
 Enemy.prototype.collideWithTop=function(tileTop){
 	if(this.getBottom()>tileTop&&this.getOldBottom()<=tileTop){
 		this.setBottom(tileTop-0.003125);
-		this.yVel=0;
+		this.velocity.y=0;
 		this.jumping=false;
 		return true;
 	}
@@ -43,17 +40,17 @@ Enemy.prototype.collideWithTop=function(tileTop){
 
 Enemy.prototype.jump=function(){
 	if(!this.jumping){
-		this.yVel=-0.5;
+		this.velocity.y=-0.5;
 		this.jumping=true;
 	}
 }
 
 
 Enemy.prototype.moveLeft=function(){
-	this.xVel=-0.1;
+	this.velocity.x=-0.1;
 }
 
 Enemy.prototype.moveRight=function(){
-	this.xVel=0.1;
+	this.velocity.x=0.1;
 }
 

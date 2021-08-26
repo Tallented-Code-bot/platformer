@@ -12,7 +12,7 @@ function World(options = {}) {
 
 
 	if ("player" in options) {
-		this.player = new Player(options.player.x || 3, options.player.y || 3, options.player.width || 0.9, options.player.height || 0.9);
+		this.player = new Player(options.player.position.x || 3, options.player.position.y || 3, options.player.width || 0.9, options.player.height || 0.9);
 	} else {
 		this.player = new Player(3, 3, 0.9, 0.9);
 	}
@@ -96,8 +96,8 @@ World.prototype.step = function (input) {
 	this.enemies.forEach((enemy) => {
 		enemy.step(this);
 	})
-	this.camera.x = this.player.x - this.camera.width / 2;
-	if (this.camera.x < 0) this.camera.x = 0;
+	this.camera.position.x = this.player.position.x - this.camera.width / 2;
+	if (this.camera.position.x < 0) this.camera.position.x = 0;
 	this.camera.render(this);
 };
 
@@ -197,7 +197,7 @@ World.prototype.editMap = function (input) {
 	}
 	if (input.mouseDown) {
 		let x = Math.floor(
-			input.mouseX / this.camera.tileWidth + this.camera.x
+			input.mouseX / this.camera.tileWidth + this.camera.position.x
 		);
 		let y = Math.floor(input.mouseY / this.camera.tileHeight);
 		this.tiles[x][y] = new Tile(
@@ -222,8 +222,8 @@ World.prototype.exportMap = function () {
 		height: this.camera.height
 	};
 	toSave.player = {
-		x: this.player.x,
-		y: this.player.y,
+		x: this.player.position.x,
+		y: this.player.position.y,
 		width: this.player.width,
 		height: this.player.height
 	};
