@@ -44,3 +44,5 @@ or stop the sand, or flip the enemy over to run the other way.
 - A ball/boulder-like enemy that rolls and tries to crush you.  This
 enemy may not work well until there are slopes in the game.
 
+
+- A plant that looks tall and nice, but when you touch it it strangles you.
