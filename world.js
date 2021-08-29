@@ -5,7 +5,7 @@ function World(options = {}) {
 
 
 	if ("camera" in options) {
-		this.camera = new Camera(options.camera.width || 20, options.camera.height || 10);
+		this.camera = new Camera(options.camera.width || 20, options.camera.height || 10,options.camera.images);
 	} else {
 		this.camera = new Camera(20, 10);
 	}

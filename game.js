@@ -27,17 +27,11 @@ function Game(){
 
 	this.instructionMenu=document.getElementById("instruction_menu");
 	this.instructionMenu.homeButton=this.instructionMenu.querySelector("button");
-	this.instructionMenu.homeButton.addEventListener("click",(event)=>{
-		this.instructionMenu.style.display="none";
-		this.startMenu.style.display="block";
-	})
+	this.instructionMenu.homeButton.addEventListener("click",()=>{this.showStartMenu()})
 
 
 	this.startMenu.instructionButton=this.startMenu.querySelectorAll("button")[1];
-	this.startMenu.instructionButton.addEventListener("click",(event)=>{
-		this.startMenu.style.display="none";
-		this.instructionMenu.style.display="block";
-	})
+	this.startMenu.instructionButton.addEventListener("click",()=>{this.showInstructionMenu()})
 
 
 	this.fileInput=document.querySelector("#start_menu input");
@@ -53,6 +47,23 @@ function Game(){
 			reader.readAsText(file);
 		})
 	})
+	this.world=new World({
+		camera:{
+			images:this.loadImages(["tilesImage","playerImage"],["images/game_tiles.png","images/player.png"],()=>{this.showStartMenu()})
+		}
+	});
+}
+
+
+Game.prototype.showStartMenu=function(){
+	this.startMenu.style.display="block";
+	this.instructionMenu.style.display="none";
+}
+
+
+Game.prototype.showInstructionMenu=function(){
+	this.startMenu.style.display="none";
+	this.instructionMenu.style.display="block";
 }
 
 
@@ -79,4 +90,19 @@ Game.prototype.gameLoop=function(){
 	if(this.state==="playing"){
 		window.requestAnimationFrame(()=>{this.gameLoop()});
 	}
+}
+
+
+
+Game.prototype.loadImages=function(names, files, onAllLoaded){
+	var i=0, numLoading=names.length;
+	const onload= ()=> --numLoading ===0 && onAllLoaded();
+	
+	const images={};
+	while(i<names.length){
+		const img= images[names[i]]=new Image;
+		img.src=files[i++];
+		img.onload=onload;
+	}
+	return images;
 }

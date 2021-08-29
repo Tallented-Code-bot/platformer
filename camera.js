@@ -1,10 +1,11 @@
-function Camera(width,height){
+function Camera(width,height,images){
 	this.image=new Image();
 	this.image.src="/images/game_tiles.png";
 	this.imageLoadedYet=false;
 	this.image.addEventListener("load",(event)=>{
 		this.imageLoadedYet=true;
 	})
+	this.images=images;
 	this.position=new Vector(0,0);
 	this.width=width;//the camera width in tiles
 	this.height=height;//the camera height in tiles
@@ -62,7 +63,7 @@ Camera.prototype.render=function(world){
 			}
 			
 			if(this.imageLoadedYet){
-				this.context.drawImage(this.image,toDraw.sourceX,toDraw.sourceY,32,32,toDraw.x,toDraw.y,toDraw.width,toDraw.height);
+				this.context.drawImage(this.images.tilesImage,toDraw.sourceX,toDraw.sourceY,32,32,toDraw.x,toDraw.y,toDraw.width,toDraw.height);
 
 			}else{
 				this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
@@ -79,7 +80,8 @@ Camera.prototype.render=function(world){
 		width:world.player.width*this.tileWidth,
 		height:world.player.height*this.tileHeight
 	}
-	this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
+	this.context.drawImage(this.images.playerImage,32,0,32,32,toDraw.x,toDraw.y,32,32);
+	// this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
 
 
 
