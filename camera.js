@@ -38,7 +38,7 @@ Camera.prototype.render=function(world){
 	//render blocks
 	for(let x=this.position.x;x<this.width+this.position.x+1;x++){
 		// console.log(x);
-		for(let y=this.position.y;y<this.height+this.position.y;y++){
+		for(let y=this.position.y;y<this.height+this.position.y+1;y++){
 			if((Math.floor(x)>world.width-1||x<0)||(y>world.height-1||y<0)){
 				this.context.fillStyle="white";
 				continue;
@@ -49,7 +49,8 @@ Camera.prototype.render=function(world){
 
 			let toDraw={
 				x:Math.floor((x-this.position.x-(this.position.x-Math.trunc(this.position.x)))*this.tileWidth),
-				y:(y-this.position.y)*this.tileHeight,
+				// y:(y-this.position.y)*this.tileHeight,
+				y:Math.floor((y-this.position.y-(this.position.y-Math.trunc(this.position.y)))*this.tileHeight),
 				width:this.tileWidth,
 				height:this.tileHeight,
 			}

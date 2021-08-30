@@ -1,7 +1,7 @@
 function World(options = {}) {
 	this.tiles = [];
 	this.width = options.width || 30; //the world width in tiles
-	this.height = options.height || 10; //the world height in tiles
+	this.height = options.height || 20; //the world height in tiles
 
 
 	if ("camera" in options) {
@@ -12,7 +12,7 @@ function World(options = {}) {
 
 
 	if ("player" in options) {
-		this.player = new Player(options.player.position.x || 3, options.player.position.y || 3, options.player.width || 0.9, options.player.height || 0.9);
+		this.player = new Player(options.player.x || 3, options.player.y || 3, options.player.width || 0.9, options.player.height || 0.9);
 	} else {
 		this.player = new Player(3, 3, 0.9, 0.9);
 	}
@@ -97,7 +97,11 @@ World.prototype.step = function (input) {
 		enemy.step(this);
 	})
 	this.camera.position.x = this.player.position.x - this.camera.width / 2;
+	this.camera.position.y=this.player.position.y-this.camera.height/2;
 	if (this.camera.position.x < 0) this.camera.position.x = 0;
+	if(this.camera.position.x+this.camera.width>this.width)this.camera.position.x=this.width-this.camera.width;
+	if(this.camera.position.y<0)this.camera.position.y=0;
+	if(this.camera.position.y+this.camera.height>this.height)this.camera.position.y=this.height-this.camera.height;
 	this.camera.render(this);
 };
 
@@ -199,7 +203,10 @@ World.prototype.editMap = function (input) {
 		let x = Math.floor(
 			input.mouseX / this.camera.tileWidth + this.camera.position.x
 		);
-		let y = Math.floor(input.mouseY / this.camera.tileHeight);
+		let y=Math.floor(
+			input.mouseY/this.camera.tileHeight+this.camera.position.y
+		)
+		// let y = Math.floor(input.mouseY / this.camera.tileHeight);
 		this.tiles[x][y] = new Tile(
 			x,
 			y,

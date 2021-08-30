@@ -42,7 +42,7 @@ function Game(){
 			reader.addEventListener("load",(event)=>{
 				let worldObject=JSON.parse(event.target.result);
 				this.world=new World(worldObject);
-				this.startButton.click();
+				this.startMenu.startButton.click();
 			})
 			reader.readAsText(file);
 		})
