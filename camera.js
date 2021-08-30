@@ -48,7 +48,7 @@ Camera.prototype.render=function(world){
 			this.context.fillStyle="white";
 
 			let toDraw={
-				x:(x-this.position.x-(this.position.x-Math.trunc(this.position.x)))*this.tileWidth,
+				x:Math.floor((x-this.position.x-(this.position.x-Math.trunc(this.position.x)))*this.tileWidth),
 				y:(y-this.position.y)*this.tileHeight,
 				width:this.tileWidth,
 				height:this.tileHeight,
@@ -80,8 +80,8 @@ Camera.prototype.render=function(world){
 		width:world.player.width*this.tileWidth,
 		height:world.player.height*this.tileHeight
 	}
-	this.context.drawImage(this.images.playerImage,32,0,32,32,toDraw.x,toDraw.y,32,32);
-	// this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
+	// this.context.drawImage(this.images.playerImage,32,0,32,32,toDraw.x,toDraw.y,32,32);
+	this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
 
 
 
