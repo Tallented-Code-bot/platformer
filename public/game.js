@@ -41,8 +41,10 @@ function Game(){
 			const reader=new FileReader();
 			reader.addEventListener("load",(event)=>{
 				let worldObject=JSON.parse(event.target.result);
-				this.world=new World(worldObject);
-				this.startMenu.startButton.click();
+				worldObject.camera.images=this.loadImages(["tilesImage","playerImage"],["images/game_tiles.png","images/player.png"],()=>{
+					this.world=new World(worldObject);
+					this.startMenu.startButton.click();
+				})
 			})
 			reader.readAsText(file);
 		})
