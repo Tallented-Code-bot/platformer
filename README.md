@@ -1,15 +1,17 @@
 # Platformer
 ## What is it?
-This is a platforming game that I am working on.  It
-features a tile-based map.
+This is a 2d platforming game.  The object is to destroy all
+the enemies without being seen by them.  If they see you,
+they can easily track you and kill you.
 
 It also features a modular engine with different components
 separated from each other.  For example, the camera class is
 completely separated from the player class, and the player class
 does not even know what a pixel is.
 
-## How to play
 
+
+## How to play
 &#11013;&#11015;&#11014;&#10145;:Move around.<br>
 M:Save map to a json file<br>
 
