@@ -1,0 +1,19 @@
+{
+  "name": "platformer",
+  "version": "1.0.0",
+  "description": "This is a platforming game that I am working on.  It features a tile-based map.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tallented-Code-bot/platformer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tallented-Code-bot/platformer/issues"
+  },
+  "homepage": "https://github.com/Tallented-Code-bot/platformer#readme"
+}
