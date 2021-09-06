@@ -41,7 +41,7 @@ function Game(){
 			const reader=new FileReader();
 			reader.addEventListener("load",(event)=>{
 				let worldObject=JSON.parse(event.target.result);
-				worldObject.camera.images=this.loadImages(["tilesImage","playerImage"],["images/game_tiles.png","images/player.png"],()=>{
+				worldObject.camera.images=this.loadImages(["tilesImage","playerImage"],["images/game_tiles.png","images/game_player.png"],()=>{
 					this.world=new World(worldObject);
 					this.startMenu.startButton.click();
 				})
@@ -51,7 +51,7 @@ function Game(){
 	})
 	this.world=new World({
 		camera:{
-			images:this.loadImages(["tilesImage","playerImage"],["images/game_tiles.png","images/player.png"],()=>{this.showStartMenu()})
+			images:this.loadImages(["tilesImage","playerImage"],["images/game_tiles.png","images/game_player.png"],()=>{this.showStartMenu()})
 		}
 	});
 }
