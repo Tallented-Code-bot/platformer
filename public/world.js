@@ -14,7 +14,7 @@ function World(options = {}) {
 	if ("player" in options) {
 		this.player = new Player(options.player.x || 3, options.player.y || 3, options.player.width || 0.9, options.player.height || 0.9);
 	} else {
-		this.player = new Player(3, 3, 0.9, 0.9);
+		this.player = new Player(3, 3, 0.3225, 0.81);
 	}
 
 
