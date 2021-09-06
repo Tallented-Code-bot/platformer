@@ -11,8 +11,8 @@ function Camera(width,height,images){
 	this.height=height;//the camera height in tiles
 	this.canvas=document.getElementById("game_canvas");
 	this.context=this.canvas.getContext("2d");
-	this.tileWidth=32;//the width in pixels for 1 tile
-	this.tileHeight=32;//the height in pixels for 1 tile
+	this.tileWidth=64;//the width in pixels for 1 tile
+	this.tileHeight=64;//the height in pixels for 1 tile
 	this.canvas.width=this.width*this.tileWidth;
 	this.canvas.height=this.height*this.tileHeight;
 	this.tileTextures={
@@ -27,6 +27,7 @@ function Camera(width,height,images){
 		grass_bottom_left:[0,64],
 		grass_bottom_right:[64,64]
 	}
+	this.context.imageSmoothingEnabled=false;
 }
 
 
@@ -76,13 +77,13 @@ Camera.prototype.render=function(world){
 	}
 	this.context.fillStyle="red";
 	let toDraw={
-		x:(world.player.position.x-this.position.x)*this.tileWidth,
+		x:(world.player.position.x-this.position.x-0.06)*this.tileWidth,
 		y:(world.player.position.y-this.position.y)*this.tileHeight,
 		width:world.player.width*this.tileWidth,
 		height:world.player.height*this.tileHeight
 	}
-	// this.context.drawImage(this.images.playerImage,32,0,32,32,toDraw.x,toDraw.y,32,32);
-	this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
+	this.context.drawImage(this.images.playerImage,0,0,32,32,toDraw.x,toDraw.y,this.tileWidth,this.tileHeight);
+	// this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
 
 
 
