@@ -1,5 +1,5 @@
-import Entity from "entity.js";
-import Vector from "vector.js";
+import {Entity} from "./entity.js";
+import {Vector} from "./vector.js";
 export function Enemy(x,y,width,height){
 	Entity.call(this,x,y,width,height);
 	this.jumping=true;

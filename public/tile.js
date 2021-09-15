@@ -1,4 +1,4 @@
-function Tile(x,y,width,height,color,type,solid){
+export function Tile(x,y,width,height,color,type,solid){
 	this.x=x;
 	this.y=y;
 	this.color=color;

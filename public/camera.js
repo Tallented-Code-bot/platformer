@@ -1,4 +1,4 @@
-import Vector from "./vector.js";
+import {Vector} from "./vector.js";
 export function Camera(width,height,images){
 	this.image=new Image();
 	this.image.src="/images/game_tiles.png";

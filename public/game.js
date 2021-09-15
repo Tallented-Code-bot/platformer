@@ -1,5 +1,5 @@
-import World from "./world.js";
-import Input from "./input.js";
+import {World} from "./world.js";
+import {Input} from "./input.js";
 export function Game(){
 	/*
 	The game object will include the world object, the title screen,

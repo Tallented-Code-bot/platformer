@@ -1,4 +1,4 @@
-import Vector from "./vector.js";
+import {Vector} from "./vector.js";
 export function Entity(x,y,width,height){
 	this.position=new Vector(x,y);
 	this.oldPosition=new Vector(x,y);

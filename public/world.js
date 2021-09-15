@@ -1,8 +1,8 @@
-import Camera from "camera.js";
-import Player from "player.js";
-import Input from "input.js";
-import Enemy from "enemy.js";
-import Tile from "tile.js";
+import {Camera} from "./camera.js";
+import {Player} from "./player.js";
+import {Input} from "./input.js";
+import {Enemy} from "./enemy.js";
+import {Tile} from "./tile.js";
 export function World(options = {}) {
 	this.tiles = [];
 	this.width = options.width || 30; //the world width in tiles
