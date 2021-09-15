@@ -1,10 +1,11 @@
-function Camera(width,height,images){
+import Vector from "./vector.js";
+export function Camera(width,height,images){
 	this.image=new Image();
 	this.image.src="/images/game_tiles.png";
 	this.imageLoadedYet=false;
-	this.image.addEventListener("load",(event)=>{
+	this.image.addEventListener("load",()=>{
 		this.imageLoadedYet=true;
-	})
+	});
 	this.images=images;
 	this.position=new Vector(0,0);
 	this.width=width;//the camera width in tiles
@@ -26,7 +27,7 @@ function Camera(width,height,images){
 		grass_bottom:[32,64],
 		grass_bottom_left:[0,64],
 		grass_bottom_right:[64,64]
-	}
+	};
 	this.context.imageSmoothingEnabled=false;
 }
 
@@ -54,14 +55,14 @@ Camera.prototype.render=function(world){
 				y:Math.floor((y-this.position.y-(this.position.y-Math.trunc(this.position.y)))*this.tileHeight),
 				width:this.tileWidth,
 				height:this.tileHeight,
-			}
+			};
 
 			try{
 				toDraw.sourceX=this.tileTextures[world.tiles[Math.floor(x)][Math.floor(y)].type][0];
 				toDraw.sourceY=this.tileTextures[world.tiles[Math.floor(x)][Math.floor(y)].type][1];
 			}
 			catch{
-				
+				break;	
 			}
 			
 			if(this.imageLoadedYet){
@@ -81,7 +82,7 @@ Camera.prototype.render=function(world){
 		y:(world.player.position.y-this.position.y)*this.tileHeight,
 		width:world.player.width*this.tileWidth,
 		height:world.player.height*this.tileHeight
-	}
+	};
 	this.context.drawImage(this.images.playerImage,0,0,32,32,toDraw.x,toDraw.y,this.tileWidth,this.tileHeight);
 	// this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
 
@@ -94,7 +95,7 @@ Camera.prototype.render=function(world){
 			y:(enemy.position.y-this.position.y)*this.tileHeight,
 			width:(enemy.width)*this.tileWidth,
 			height:(enemy.height)*this.tileHeight
-		}
+		};
 		this.context.fillRect(toDraw.x,toDraw.y,toDraw.width,toDraw.height);
 	});
 
@@ -102,7 +103,7 @@ Camera.prototype.render=function(world){
 
 	this.context.fillStyle="black";
 	this.context.fillText(world.availableTiles[world.tileIndex],10,10);
-}
+};
 
 
 
@@ -110,5 +111,5 @@ Camera.prototype.render=function(world){
 Camera.prototype.convertToPixel=function(blockX,blockY){
 	let x=blockX*this.tileWidth;
 	let y=blockY*this.tileHeight;
-	return {x:x,y:y}
-}
+	return {x:x,y:y};
+};

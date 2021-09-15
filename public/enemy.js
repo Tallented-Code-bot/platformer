@@ -1,4 +1,6 @@
-function Enemy(x,y,width,height){
+import Entity from "entity.js";
+import Vector from "vector.js";
+export function Enemy(x,y,width,height){
 	Entity.call(this,x,y,width,height);
 	this.jumping=true;
 }
@@ -15,7 +17,7 @@ Enemy.prototype.doAi=function(world){
 	}else if(d>0){
 		this.moveRight();
 	}
-}
+};
 
 Enemy.prototype.step=function(world){
 	this.doAi(world);
@@ -25,7 +27,7 @@ Enemy.prototype.step=function(world){
 	this.velocity.addTo(new Vector(0,0.03));
 	this.velocity.multTo(new Vector(0.9,0.9));
 	this.checkCollisions(world);
-}
+};
 
 Enemy.prototype.collideWithTop=function(tileTop){
 	if(this.getBottom()>tileTop&&this.getOldBottom()<=tileTop){
@@ -35,7 +37,7 @@ Enemy.prototype.collideWithTop=function(tileTop){
 		return true;
 	}
 	return false;
-}
+};
 
 
 Enemy.prototype.jump=function(){
@@ -43,14 +45,14 @@ Enemy.prototype.jump=function(){
 		this.velocity.y=-0.5;
 		this.jumping=true;
 	}
-}
+};
 
 
 Enemy.prototype.moveLeft=function(){
 	this.velocity.x=-0.1;
-}
+};
 
 Enemy.prototype.moveRight=function(){
 	this.velocity.x=0.1;
-}
+};
 

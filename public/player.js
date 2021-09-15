@@ -1,4 +1,6 @@
-function Player(x,y,width,height){
+import Vector from "./vector.js";
+import Entity from "./entity.js";
+export function Player(x,y,width,height){
 	Entity.call(this,x,y,width,height);
 	this.jumping=true;
 }
@@ -16,7 +18,7 @@ Player.prototype.keyControl=function(input){
 		}
 	}
 	if(input.down)this.velocity.y=0.1;
-}
+};
 
 
 
@@ -34,4 +36,4 @@ Player.prototype.collideWithTop=function(tileTop){
 		return true;
 	}
 	return false;
-}
+};

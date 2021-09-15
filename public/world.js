@@ -1,4 +1,9 @@
-function World(options = {}) {
+import Camera from "camera.js";
+import Player from "player.js";
+import Input from "input.js";
+import Enemy from "enemy.js";
+import Tile from "tile.js";
+export function World(options = {}) {
 	this.tiles = [];
 	this.width = options.width || 30; //the world width in tiles
 	this.height = options.height || 20; //the world height in tiles
@@ -59,7 +64,7 @@ function World(options = {}) {
 
 
 	if ("tiles" in options) {
-		this.populateTiles({ tiles: options.tiles })
+		this.populateTiles({ tiles: options.tiles });
 	} else {
 		this.populateTiles();
 	}
@@ -95,7 +100,7 @@ World.prototype.step = function (input) {
 	this.player.step(this);
 	this.enemies.forEach((enemy) => {
 		enemy.step(this);
-	})
+	});
 	this.camera.position.x = this.player.position.x - this.camera.width / 2;
 	this.camera.position.y=this.player.position.y-this.camera.height/2;
 	if (this.camera.position.x < 0) this.camera.position.x = 0;
@@ -205,7 +210,7 @@ World.prototype.editMap = function (input) {
 		);
 		let y=Math.floor(
 			input.mouseY/this.camera.tileHeight+this.camera.position.y
-		)
+		);
 		// let y = Math.floor(input.mouseY / this.camera.tileHeight);
 		this.tiles[x][y] = new Tile(
 			x,
@@ -241,7 +246,7 @@ World.prototype.exportMap = function () {
 			y: this.enemies[i].y,
 			width: this.enemies[i].width,
 			height: this.enemies[i].height
-		})
+		});
 	}
 	toSave.tiles = [];
 
@@ -260,9 +265,9 @@ World.prototype.exportMap = function () {
 		}
 	}
 
-	let newFile = new File([JSON.stringify(toSave)], "game_world.json", {
-		type: "application/json;charset=utf-8"
-	});
+	// let newFile = new File([JSON.stringify(toSave)], "game_world.json", {
+	// 	type: "application/json;charset=utf-8"
+	// });
 	let newBlob = new Blob([JSON.stringify(toSave)], {
 		type: "application/json"
 	});

@@ -1,5 +1,6 @@
-
-function Game(){
+import World from "./world.js";
+import Input from "./input.js";
+export function Game(){
 	/*
 	The game object will include the world object, the title screen,
 	and other stuff.
@@ -19,7 +20,7 @@ function Game(){
 	this.startMenu=document.getElementById("start_menu");
 	this.startMenu.startButton=this.startMenu.querySelector("button");
 	// this.startButton=document.querySelector("#start_menu button");
-	this.startMenu.startButton.addEventListener("click",(e)=>{this.start();});
+	this.startMenu.startButton.addEventListener("click",()=>{this.start();});
 	
 
 	this.pauseMenu=document.getElementById("pause_play");
@@ -27,11 +28,11 @@ function Game(){
 
 	this.instructionMenu=document.getElementById("instruction_menu");
 	this.instructionMenu.homeButton=this.instructionMenu.querySelector("button");
-	this.instructionMenu.homeButton.addEventListener("click",()=>{this.showStartMenu()})
+	this.instructionMenu.homeButton.addEventListener("click",()=>{this.showStartMenu();});
 
 
 	this.startMenu.instructionButton=this.startMenu.querySelectorAll("button")[1];
-	this.startMenu.instructionButton.addEventListener("click",()=>{this.showInstructionMenu()})
+	this.startMenu.instructionButton.addEventListener("click",()=>{this.showInstructionMenu();});
 
 
 	this.fileInput=document.querySelector("#start_menu input");
@@ -44,14 +45,14 @@ function Game(){
 				worldObject.camera.images=this.loadImages(["tilesImage","playerImage"],["images/game_tiles.png","images/game_player.png"],()=>{
 					this.world=new World(worldObject);
 					this.startMenu.startButton.click();
-				})
-			})
+				});
+			});
 			reader.readAsText(file);
-		})
-	})
+		});
+	});
 	this.world=new World({
 		camera:{
-			images:this.loadImages(["tilesImage","playerImage"],["images/game_tiles.png","images/game_player.png"],()=>{this.showStartMenu()})
+			images:this.loadImages(["tilesImage","playerImage"],["images/game_tiles.png","images/game_player.png"],()=>{this.showStartMenu();})
 		}
 	});
 }
@@ -60,13 +61,13 @@ function Game(){
 Game.prototype.showStartMenu=function(){
 	this.startMenu.style.display="block";
 	this.instructionMenu.style.display="none";
-}
+};
 
 
 Game.prototype.showInstructionMenu=function(){
 	this.startMenu.style.display="none";
 	this.instructionMenu.style.display="block";
-}
+};
 
 
 
@@ -74,13 +75,13 @@ Game.prototype.showInstructionMenu=function(){
 Game.prototype.start=function(){
 	this.state="playing";
 	this.startMenu.style.display="none";
-	window.requestAnimationFrame(()=>{this.gameLoop()});
-}
+	window.requestAnimationFrame(()=>{this.gameLoop();});
+};
 
 
 Game.prototype.stop=function(){
 	this.state="paused";
-}
+};
 
 Game.prototype.gameLoop=function(){
 	this.world.step(this.input);
@@ -90,9 +91,9 @@ Game.prototype.gameLoop=function(){
 		this.world.exportMap();
 	}
 	if(this.state==="playing"){
-		window.requestAnimationFrame(()=>{this.gameLoop()});
+		window.requestAnimationFrame(()=>{this.gameLoop();});
 	}
-}
+};
 
 
 
@@ -107,4 +108,4 @@ Game.prototype.loadImages=function(names, files, onAllLoaded){
 		img.onload=onload;
 	}
 	return images;
-}
+};

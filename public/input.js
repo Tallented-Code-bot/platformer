@@ -1,4 +1,4 @@
-function Input(){
+export function Input(){
 	this.left=false;
 	this.right=false;
 	this.up=false;
@@ -17,34 +17,34 @@ function Input(){
 Input.prototype.init=function(canvas){
 	window.addEventListener("keydown",(event)=>{
 		switch(event.key){
-			case "ArrowUp":this.up=true;break;
-			case "ArrowDown":this.down=true;break;
-			case "ArrowLeft":this.left=true;break;
-			case "ArrowRight":this.right=true;break;
-			case "a":this.left=true;break;
-			case "d":this.right=true;break;
-			case "w":this.up=true;break;
-			case "s":this.down=true;break;
-			case "0":this.editing=true;break;
-			case "1":this.one=true;break;
-			case "2":this.two=true;break;
-			case "n":this.n=true;break;
-			case "m":this.m=true;break;
+		case "ArrowUp":this.up=true;break;
+		case "ArrowDown":this.down=true;break;
+		case "ArrowLeft":this.left=true;break;
+		case "ArrowRight":this.right=true;break;
+		case "a":this.left=true;break;
+		case "d":this.right=true;break;
+		case "w":this.up=true;break;
+		case "s":this.down=true;break;
+		case "0":this.editing=true;break;
+		case "1":this.one=true;break;
+		case "2":this.two=true;break;
+		case "n":this.n=true;break;
+		case "m":this.m=true;break;
 		}
 	});
 	window.addEventListener("keyup",(event)=>{
 		switch(event.key){
-			case "ArrowUp":this.up=false;break;
-			case "ArrowDown":this.down=false;break;
-			case "ArrowLeft":this.left=false;break;
-			case "ArrowRight":this.right=false;break;
-			case "a":this.left=false;break;
-			case "d":this.right=false;break;
-			case "w":this.up=false;break;
-			case "s":this.down=false;break;
-			case "0":this.editing=false;break;
-			case "n":this.n=false;break;
-			case "m":this.m=false;break;
+		case "ArrowUp":this.up=false;break;
+		case "ArrowDown":this.down=false;break;
+		case "ArrowLeft":this.left=false;break;
+		case "ArrowRight":this.right=false;break;
+		case "a":this.left=false;break;
+		case "d":this.right=false;break;
+		case "w":this.up=false;break;
+		case "s":this.down=false;break;
+		case "0":this.editing=false;break;
+		case "n":this.n=false;break;
+		case "m":this.m=false;break;
 		}
 	});
 
@@ -54,11 +54,11 @@ Input.prototype.init=function(canvas){
 		this.mouseY=event.clientY-rect.top;
 	});
 
-	window.addEventListener("mousedown",(event)=>{
+	window.addEventListener("mousedown",()=>{
 		this.mouseDown=true;
 	});
 
-	window.addEventListener("mouseup",(event)=>{
-		this.mouseDown=false;;
-	})
-}
+	window.addEventListener("mouseup",()=>{
+		this.mouseDown=false;
+	});
+};
