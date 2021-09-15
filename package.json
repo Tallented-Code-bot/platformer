@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Tallented-Code-bot/platformer#readme",
   "devDependencies": {
+    "eslint": "^7.32.0",
     "nodemon": "^2.0.12"
   },
   "dependencies": {
