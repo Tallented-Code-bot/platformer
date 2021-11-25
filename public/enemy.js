@@ -17,6 +17,8 @@ Enemy.prototype.doAi=function(world){
 	}else if(d>0){
 		this.moveRight();
 	}
+
+	
 };
 
 Enemy.prototype.step=function(world){

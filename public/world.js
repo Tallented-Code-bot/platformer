@@ -3,6 +3,7 @@ import {Player} from "./player.js";
 import {Input} from "./input.js";
 import {Enemy} from "./enemy.js";
 import {Tile} from "./tile.js";
+import {Pathfinder} from "./pathfinding.js";
 export function World(options = {}) {
 	this.tiles = [];
 	this.width = options.width || 30; //the world width in tiles
@@ -91,6 +92,11 @@ export function World(options = {}) {
 		const files = dt.files;
 		this.importMap(files);
 	});
+
+	this.pathfinder=new Pathfinder();
+	this.pathfinder.initializeMap(this);
+
+	// console.log(this.pathfinder.findPath(3,3,5,5));
 }
 
 World.prototype.step = function (input) {
